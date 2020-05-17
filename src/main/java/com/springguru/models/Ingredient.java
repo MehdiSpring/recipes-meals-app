@@ -3,10 +3,12 @@ package com.springguru.models;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Ingredient {
@@ -20,6 +22,16 @@ public class Ingredient {
 	@ManyToOne
 	private Recipe recipe;
 	
+	//EAGER is the default behavior of @OneToOne relation
+	@OneToOne(fetch = FetchType.EAGER)
+	private UnitOfMeasure uom;
+	
+	public UnitOfMeasure getUom() {
+		return uom;
+	}
+	public void setUom(UnitOfMeasure uom) {
+		this.uom = uom;
+	}
 	public Long getId() {
 		return id;
 	}
