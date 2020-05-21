@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,7 +20,7 @@ public class Recipe {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idRecipe;
+	private Long id;
 	
 	private String description;
 	private Integer prepTime;
@@ -40,6 +41,9 @@ public class Recipe {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
 	private Set<Ingredient> ingredients = new HashSet<Ingredient>();
+	
+	@ManyToMany
+	private Set<Category> categories = new HashSet<Category>();
 	
 	public String getDescription() {
 		return description;
@@ -95,11 +99,11 @@ public class Recipe {
 	public void setNotes(Notes notes) {
 		this.notes = notes;
 	}
-	public Long getIdRecipe() {
-		return idRecipe;
+	public Long getId() {
+		return id;
 	}
-	public void setIdRecipe(Long idRecipe) {
-		this.idRecipe = idRecipe;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public Set<Ingredient> getIngredients() {
 		return ingredients;
@@ -112,6 +116,12 @@ public class Recipe {
 	}
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
+	}
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
 	}
 	
 	
