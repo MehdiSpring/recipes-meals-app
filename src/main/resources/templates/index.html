@@ -5,6 +5,12 @@
 <title>Index Page</title>
 </head>
 <body>
-<h1>My Index Page .... test</h1>
+<h1>This is my category food : <div style="font: italic;color: red" th:text=${category}></div></h1>
+<h2 style = "color: blue" th:text=${recipeName}></h2>
+<table>
+<tr th:each="ingr : ${ingredients}">
+<td><div th:text = ${ingr.amount}></div> <div th:text = ${ingr.uom.uom}></div> <div th:text = ${ingr.description}></div></td>
+</tr>
+</table>
 </body>
 </html>
