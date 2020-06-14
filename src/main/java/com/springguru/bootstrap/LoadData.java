@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,11 @@ import com.springguru.repositories.CategoryRepository;
 import com.springguru.repositories.RecipeRepository;
 import com.springguru.repositories.UnitOfMeasureRepository;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
 @Component
 public class LoadData implements CommandLineRunner{
 
@@ -28,23 +35,25 @@ public class LoadData implements CommandLineRunner{
 	
 
 
-	public LoadData(RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository,
-			CategoryRepository categoryRepository) {
-		this.recipeRepository = recipeRepository;
-		this.unitOfMeasureRepository = unitOfMeasureRepository;
-		this.categoryRepository = categoryRepository;
-	}
+	/*
+	 * public LoadData(RecipeRepository recipeRepository, UnitOfMeasureRepository
+	 * unitOfMeasureRepository, CategoryRepository categoryRepository) {
+	 * this.recipeRepository = recipeRepository; this.unitOfMeasureRepository =
+	 * unitOfMeasureRepository; this.categoryRepository = categoryRepository; }
+	 */
 
 
 
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
 		Optional<UnitOfMeasure> tablespoon = this.unitOfMeasureRepository.findByUom("tablespoon");
 		Optional<UnitOfMeasure> teaspoon = this.unitOfMeasureRepository.findByUom("teaspoon");
 		Optional<UnitOfMeasure> clove = this.unitOfMeasureRepository.findByUom("clove");
+		
 		
 		Recipe spicyGrilled = new Recipe();
 		spicyGrilled.setCookTime(15);
@@ -84,6 +93,8 @@ public class LoadData implements CommandLineRunner{
 		spicyGrilled.setCategories(categories);
 		
 		this.recipeRepository.save(spicyGrilled);
+		
+		log.debug("******* All the data have been saved successfully *******");
 	}
 
 }

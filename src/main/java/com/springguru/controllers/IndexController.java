@@ -11,22 +11,30 @@ import com.springguru.models.Recipe;
 import com.springguru.repositories.CategoryRepository;
 import com.springguru.repositories.RecipeRepository;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+
+@Slf4j
+@RequiredArgsConstructor
 @Controller
 public class IndexController {
 	
 	private final CategoryRepository categoryRepository;
 	private final RecipeRepository recipeRepository;
 	
-	public IndexController(CategoryRepository categoryRepository, RecipeRepository recipeRepository) {
-		this.categoryRepository = categoryRepository;
-		this.recipeRepository = recipeRepository;
-	}
+	/*
+	 * public IndexController(CategoryRepository categoryRepository,
+	 * RecipeRepository recipeRepository) { this.categoryRepository =
+	 * categoryRepository; this.recipeRepository = recipeRepository; }
+	 */
 
 
 
 	@RequestMapping({"","/","index"})
 	public String getIndexMsg(Model model)
 	{
+		log.info("----- The indexpage is consulted ------");
 		//The optional type is a new feature of java 8
 		/*Since Spring 5, all the methods declared in a CrudRepositoy interface that retrieves an entity object, will no longer return the object directly,
 		but they will encapsulate it in an Optional object and return this optional type*/
