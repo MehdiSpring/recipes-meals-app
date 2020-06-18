@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@Controller
+@Controller 
 public class IndexController {
 	
 	private final CategoryRepository categoryRepository;
@@ -33,7 +33,7 @@ public class IndexController {
 
 	@RequestMapping({"","/","index"})
 	public String getIndexMsg(Model model)
-	{
+	{ 
 		log.info("----- The indexpage is consulted ------");
 		//The optional type is a new feature of java 8
 		/*Since Spring 5, all the methods declared in a CrudRepositoy interface that retrieves an entity object, will no longer return the object directly,
