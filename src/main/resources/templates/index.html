@@ -3,14 +3,51 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Index Page</title>
+<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>This is my category food : <div style="font: italic;color: red" th:text=${category}></div></h1>
-<h2 style = "color: blue" th:text=${recipeName}></h2>
-<table>
-<tr th:each="ingr : ${ingredients}">
-<td><div th:text = ${ingr.amount}></div> <div th:text = ${ingr.uom.uom}></div> <div th:text = ${ingr.description}></div></td>
-</tr>
-</table>
+<div class="container-fluid" style="margin-top: 30px;">
+   <div class="row">
+       <div class="col-md-6 col-md-offset-3">
+       	   <div class="panel panel-primary">
+       	       <div class="panel-heading">
+       	           <h1 class="panel-title">
+       	              This is my category food : <div style="font: italic;color: red" th:text=${category}></div>
+       	           </h1>
+       	           <h2 class="panel-title" style = "color: white" th:text=${recipeName}></h2>
+       	       </div>
+       	       <div class="panel-body">
+       	               <div class="table-responsive" th:if="${not #lists.isEmpty(ingredients)}">
+       	                   <table class="table table-hover">
+       	                         <thead class="thead-inverse">
+       	                             <tr>
+       	                                <td>AMOUNT</td>
+       	                                <td>UOM</td>
+       	                                <td>Description</td>
+       	                             </tr>
+       	                         </thead>
+       	                         <tr th:each="ingr : ${ingredients}">
+       	                                <td th:text = ${ingr.amount}></td>
+       	                                <td th:text = ${ingr.uom.uom}></td>
+       	                                <td th:text = ${ingr.description}></td>
+       	                         </tr>
+       	                   </table>
+       	               </div>
+       	           </div>
+       	       </div>
+       	   </div>
+       </div>
+   </div>
+</div>
+
+
+
 </body>
 </html>
