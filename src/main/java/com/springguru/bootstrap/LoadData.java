@@ -87,9 +87,12 @@ public class LoadData implements CommandLineRunner{
 		
 		Set<Category> categories = new HashSet<Category>();
 		
-		Optional<Category> category = this.categoryRepository.findByCategoryName("Morrocan");	
-		categories.add(category.get());
-				
+		Optional<Category> category1 = this.categoryRepository.findByCategoryName("Morrocan");	
+		categories.add(category1.get());
+		
+		Optional<Category> category2 = this.categoryRepository.findByCategoryName("Tunisien");	
+		categories.add(category2.get());
+		
 		spicyGrilled.setCategories(categories);
 		
 		this.recipeRepository.save(spicyGrilled);

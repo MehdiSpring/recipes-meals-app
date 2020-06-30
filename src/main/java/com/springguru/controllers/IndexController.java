@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller 
 public class IndexController {
 	
-	private final CategoryRepository categoryRepository;
+	
 	private final RecipeRepository recipeRepository;
 	
 	/*
@@ -39,16 +39,9 @@ public class IndexController {
 		/*Since Spring 5, all the methods declared in a CrudRepositoy interface that retrieves an entity object, will no longer return the object directly,
 		but they will encapsulate it in an Optional object and return this optional type*/
 		//Optional<Category> category = this.categoryRepository.findById(1L);
-		Optional<Category> category = this.categoryRepository.findByCategoryName("Morrocan");
 		
-		Category emptyCategory = new Category();
-		emptyCategory.setCategoryName("Empty Category");
 		
-		Optional<Recipe> recipe = this.recipeRepository.findByDescription("Spicy Grilled Chicken Tacos");
-		
-		model.addAttribute("category", category.orElse(emptyCategory).getCategoryName());
-		model.addAttribute("recipeName", recipe.get().getDescription());
-		model.addAttribute("ingredients", recipe.get().getIngredients());
+		model.addAttribute("recipes", this.recipeRepository.findAll());
 		
 		return "index";
 	}

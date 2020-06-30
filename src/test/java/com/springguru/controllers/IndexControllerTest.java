@@ -45,7 +45,7 @@ public class IndexControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		indexController = new IndexController(categoryRepository, recipeRepository);
+		indexController = new IndexController(recipeRepository);
 	}
 
 	@Test

@@ -4,13 +4,17 @@
 <meta charset="ISO-8859-1">
 <title>Index Page</title>
 <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
+	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"
+	th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
 	
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+	<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 	
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" 
+	integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+	 crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 <div class="container-fluid" style="margin-top: 30px;">
@@ -19,24 +23,24 @@
        	   <div class="panel panel-primary">
        	       <div class="panel-heading">
        	           <h1 class="panel-title">
-       	              This is my category food : <div style="font: italic;color: red" th:text=${category}></div>
+       	              List of recipes
        	           </h1>
-       	           <h2 class="panel-title" style = "color: white" th:text=${recipeName}></h2>
+       	           
        	       </div>
        	       <div class="panel-body">
-       	               <div class="table-responsive" th:if="${not #lists.isEmpty(ingredients)}">
+       	               <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
        	                   <table class="table table-hover">
        	                         <thead class="thead-inverse">
        	                             <tr>
-       	                                <td>AMOUNT</td>
-       	                                <td>UOM</td>
-       	                                <td>Description</td>
+       	                                <td><b>ID</b></td>       	                             
+       	                                <td><b>Description</b></td>
+       	                                <td><b>Details</b></td>
        	                             </tr>
        	                         </thead>
-       	                         <tr th:each="ingr : ${ingredients}">
-       	                                <td th:text = ${ingr.amount}></td>
-       	                                <td th:text = ${ingr.uom.uom}></td>
-       	                                <td th:text = ${ingr.description}></td>
+       	                         <tr th:each="recip : ${recipes}">
+       	                                <td th:text = ${recip.id}></td>     	                                
+       	                                <td th:text = ${recip.description}></td>
+       	                                <td><a th:href="@{'/recipe/show/'+${recip.id}}">View</a></td>
        	                         </tr>
        	                   </table>
        	               </div>
@@ -44,7 +48,7 @@
        	       </div>
        	   </div>
        </div>
-   </div>
+   
 </div>
 
 
