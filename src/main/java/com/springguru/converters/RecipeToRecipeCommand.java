@@ -7,11 +7,17 @@ import org.springframework.stereotype.Component;
 import com.springguru.commands.RecipeCommand;
 import com.springguru.models.Recipe;
 
+import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 
+@RequiredArgsConstructor
 @Component
 public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
 
+	private final CategoryToCategoryCommand categoryToCategoryCommand;
+	private final IngredientToIngredientCommand ingredientToIngredientCommand;
+	private final NotesToNotesCommand notesToNotesCommand;
+	
 	@Nullable
 	@Synchronized
 	@Override
