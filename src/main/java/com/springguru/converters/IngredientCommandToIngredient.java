@@ -16,7 +16,7 @@ import lombok.Synchronized;
 @Component
 public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient>{
 
-	private final RecipeCommandToRecipe recipeCommandtoRecipe;
+	//private final RecipeCommandToRecipe recipeCommandtoRecipe;
 	private final UOMCommandToUOM uomCommandToUOM;
 	
 	@Nullable
@@ -36,9 +36,10 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
 		if(uom != null)
 			ingredient.setUom(uom);
 		
-		Recipe recipe = this.recipeCommandtoRecipe.convert(source.getRecipe());
-		if(recipe != null)
-			ingredient.setRecipe(recipe);
+		/*
+		 * Recipe recipe = this.recipeCommandtoRecipe.convert(source.getRecipe());
+		 * if(recipe != null) ingredient.setRecipe(recipe);
+		 */
 		
 		return ingredient;
 	}

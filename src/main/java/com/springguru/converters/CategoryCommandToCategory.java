@@ -19,7 +19,7 @@ import lombok.Synchronized;
 @Component
 public class CategoryCommandToCategory implements Converter<CategoryCommand, Category>{
 
-	private final RecipeCommandToRecipe recipeCommandToRecipe;
+	//private final RecipeCommandToRecipe recipeCommandToRecipe;
 	
 	@Nullable
 	@Synchronized
@@ -31,14 +31,13 @@ public class CategoryCommandToCategory implements Converter<CategoryCommand, Cat
 		category.setId(source.getId());
 		category.setCategoryName(source.getCategoryName());
 		
-		Set<RecipeCommand> recipesCommands = source.getRecipes();
-		
-		for(RecipeCommand recipeCommand: recipesCommands)
-		{
-			Recipe recipe = this.recipeCommandToRecipe.convert(recipeCommand);
-			if(recipe!= null)
-				category.getRecipes().add(recipe);
-		}
+		/*
+		 * Set<RecipeCommand> recipesCommands = source.getRecipes();
+		 * 
+		 * for(RecipeCommand recipeCommand: recipesCommands) { Recipe recipe =
+		 * this.recipeCommandToRecipe.convert(recipeCommand); if(recipe!= null)
+		 * category.getRecipes().add(recipe); }
+		 */
 		
 		return category;
 	}

@@ -12,6 +12,6 @@ public class NotesCommand {
 	
 	private Long idNotes;
 	private String recipeNotes;
-	private RecipeCommand recipe;
+	//private RecipeCommand recipe;
 
 }

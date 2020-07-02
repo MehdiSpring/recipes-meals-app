@@ -14,6 +14,6 @@ public class CategoryCommand {
 	
 	private Long id;
 	private String categoryName;
-	private Set<RecipeCommand> recipes = new HashSet<RecipeCommand>();
+	//private Set<RecipeCommand> recipes = new HashSet<RecipeCommand>();
 
 }

@@ -15,7 +15,7 @@ import lombok.Synchronized;
 @Component
 public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
 	
-	private final RecipeCommandToRecipe recipeCommandToRecipe;
+	//private final RecipeCommandToRecipe recipeCommandToRecipe;
 	
 	@Nullable
 	@Synchronized
@@ -29,9 +29,10 @@ public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
 		notes.setIdNotes(source.getIdNotes());
 		notes.setRecipeNotes(source.getRecipeNotes());
 		
-		Recipe recipe = this.recipeCommandToRecipe.convert(source.getRecipe());
-		if(recipe != null)
-			notes.setRecipe(recipe);
+		/*
+		 * Recipe recipe = this.recipeCommandToRecipe.convert(source.getRecipe());
+		 * if(recipe != null) notes.setRecipe(recipe);
+		 */
 		
 		return notes;
 	}
