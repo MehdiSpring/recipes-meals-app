@@ -23,12 +23,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.springguru.models.Recipe;
 import com.springguru.repositories.RecipeRepository;
+import com.springguru.service.RecipeService;
 
 @ExtendWith(MockitoExtension.class)
 class RecipeControllerTest {
 
 	@Mock
-	RecipeRepository recipeRepository;
+	RecipeService recipeService;
 	
 	@InjectMocks
 	RecipeController recipeController;
@@ -46,7 +47,7 @@ class RecipeControllerTest {
 
 	@Test
 	void testRecipeById() throws Exception{
-		when(recipeRepository.findById(ArgumentMatchers.anyLong())).thenReturn(recipe);
+		when(recipeService.findById(ArgumentMatchers.anyLong())).thenReturn(recipe);
 		mockMVC.perform(get("/recipe/show/1")).andExpect(status().isOk())
 		                                      .andExpect(view().name("recipe/details"))
 		                                      .andExpect(model().attributeExists("recipe"));
