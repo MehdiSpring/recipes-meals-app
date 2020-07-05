@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.springguru.models.Category;
 import com.springguru.models.Recipe;
 import com.springguru.repositories.CategoryRepository;
-import com.springguru.repositories.RecipeRepository;
+
+import com.springguru.service.RecipeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class IndexController {
 	
 	
-	private final RecipeRepository recipeRepository;
+	private final RecipeService recipeService;
 	
 	/*
 	 * public IndexController(CategoryRepository categoryRepository,
@@ -41,7 +42,7 @@ public class IndexController {
 		//Optional<Category> category = this.categoryRepository.findById(1L);
 		
 		
-		model.addAttribute("recipes", this.recipeRepository.findAll());
+		model.addAttribute("recipes", this.recipeService.findAll());
 		
 		return "index";
 	}
