@@ -32,7 +32,7 @@ public class IndexController {
 
 
 
-	@RequestMapping({"","/","index"})
+	@RequestMapping({"","/","/index"})
 	public String getIndexMsg(Model model)
 	{ 
 		log.info("----- The indexpage is consulted ------");

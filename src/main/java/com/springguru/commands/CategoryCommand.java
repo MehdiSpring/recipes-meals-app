@@ -1,8 +1,5 @@
 package com.springguru.commands;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CategoryCommand {
+public class CategoryCommand { 
 	
 	private Long id;
 	private String categoryName;

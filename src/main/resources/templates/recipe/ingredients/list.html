@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Index Page</title>
+<title>Ingredients</title>
 <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
 	integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"
@@ -23,26 +23,28 @@
        	   <div class="panel panel-primary">
        	       <div class="panel-heading">
        	           <h1 class="panel-title">
-       	              List of recipes
+       	              List of Ingredient
        	           </h1>
        	           
        	       </div>
        	       <div class="panel-body">
-       	               <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+       	               <div class="table-responsive" th:if="${not #lists.isEmpty(recipeCommand.ingredients)}">
        	                   <table class="table table-hover">
        	                         <thead class="thead-inverse">
        	                             <tr>
        	                                <td><b>ID</b></td>       	                             
        	                                <td><b>Description</b></td>
-       	                                <td><b>Details</b></td>
+       	                                <td><b>View</b></td>
+       	                                <td><b>Update</b></td>
+       	                                <td><b>Delete</b></td>
        	                             </tr>
        	                         </thead>
-       	                         <tr th:each="recip : ${recipes}">
-       	                                <td th:text = ${recip.id}></td>     	                                
-       	                                <td th:text = ${recip.description}></td>
-       	                                <td><a th:href="@{'/recipe/show/'+${recip.id}}">View</a></td>
-       	                                <td><a th:href="@{'/recipe/update/'+${recip.id}}">Update</a></td>
-       	                                <td><a th:href="@{'/recipe/delete/'+${recip.id}}">Delete</a></td>
+       	                         <tr th:each="ingr : ${recipeCommand.ingredients}">
+       	                                <td th:text = ${ingr.id}></td>     	                                
+       	                                <td th:text = ${ingr.description}></td>
+       	                                <td><a th:href="@{'/ingredient/show/'+${ingr.id}}">View</a></td>
+       	                                <td><a th:href="@{'/ingredient/update/'+${ingr.id}}">Update</a></td>
+       	                                <td><a th:href="@{'/ingredient/delete/'+${ingr.id}}">Delete</a></td>
        	                         </tr>
        	                   </table>
        	               </div>
@@ -52,8 +54,5 @@
        </div>
    
 </div>
-
-
-
 </body>
 </html>

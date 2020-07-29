@@ -24,7 +24,7 @@ import com.springguru.repositories.RecipeRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class RecipeServiceImplTestIt {
+class RecipeServiceImplTestIT {
 
 	Long id=2L;
 	Integer cookTime = 20;

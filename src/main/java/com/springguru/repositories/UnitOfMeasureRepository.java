@@ -8,5 +8,5 @@ import com.springguru.models.UnitOfMeasure;
 
 public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Long>{
 
-	Optional<UnitOfMeasure> findByUom(String uom);
+	Optional<UnitOfMeasure> findByUom(String uom); 
 }

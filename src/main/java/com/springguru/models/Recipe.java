@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(exclude = {"notes","ingredients","categories"})
 @Entity
-public class Recipe {
+public class Recipe { 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,8 +1,11 @@
 package com.springguru.controllers;
 
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -19,10 +22,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;import com.springguru.commands.RecipeCommand;
 import com.springguru.models.Recipe;
 import com.springguru.repositories.RecipeRepository;
+import com.springguru.service.CategoryService;
 import com.springguru.service.RecipeService;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,6 +33,9 @@ class RecipeControllerTest {
 
 	@Mock
 	RecipeService recipeService;
+	
+	@Mock
+	CategoryService categoryService;
 	
 	@InjectMocks
 	RecipeController recipeController;
@@ -52,5 +58,29 @@ class RecipeControllerTest {
 		                                      .andExpect(view().name("recipe/details"))
 		                                      .andExpect(model().attributeExists("recipe"));
 	}
-
+	
+	@Test
+	void testRecipeForm() throws Exception{
+		mockMVC.perform(get("/recipe/new/")).andExpect(status().isOk())
+											.andExpect(view().name("recipe/recipeForm"));
+	}
+	
+	@Test
+	void testGetRecipetoUpdate() {
+		
+	}
+	
+	@Test
+	void testSaveOrUpdate() throws Exception{
+		RecipeCommand recipeCommand = new RecipeCommand();
+		recipeCommand.setId(5L);
+		when(recipeService.saveRecipeCommand(any())).thenReturn(recipeCommand);
+		mockMVC.perform(post("/recipe/save")).andExpect(status().is3xxRedirection())
+										     .andExpect(view().name("redirect:/recipe/show/5"));
+	}
+	@Test
+	void testDeleteRecipe() throws Exception{
+		mockMVC.perform(get("/recipe/delete/1")).andExpect(status().is3xxRedirection())
+												   .andExpect(view().name("redirect:/index"));
+	}
 }
