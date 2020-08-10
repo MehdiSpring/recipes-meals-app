@@ -28,6 +28,9 @@
        	           
        	       </div>
        	       <div class="panel-body">
+       	               
+       	               
+       	               
        	               <div class="table-responsive" th:if="${not #lists.isEmpty(recipeCommand.ingredients)}">
        	                   <table class="table table-hover">
        	                         <thead class="thead-inverse">
@@ -43,11 +46,24 @@
        	                                <td th:text = ${ingr.id}></td>     	                                
        	                                <td th:text = ${ingr.description}></td>
        	                                <td><a th:href="@{'/ingredient/show/'+${ingr.id}}">View</a></td>
-       	                                <td><a th:href="@{'/ingredient/update/'+${ingr.id}}">Update</a></td>
-       	                                <td><a th:href="@{'/ingredient/delete/'+${ingr.id}}">Delete</a></td>
+       	                                <td><a th:href="@{'/ingredient/'+${recipeCommand.id}+'/update/'+${ingr.id}}">Update</a></td>
+       	                                <td><a th:href="@{'/ingredient/'+${recipeCommand.id}+'/delete/'+${ingr.id}}">Delete</a></td>
        	                         </tr>
+       	                         
+       	                         
+       	                         
        	                   </table>
        	               </div>
+       	               
+       	               <div class="row">
+        					<div class="col-md-10">
+        					</div>
+        					
+        					<div class="col-md-2">
+        						<a class="btn btn-default" th:href="@{'/ingredient/'+${recipeCommand.id}+'/create/'}" role="button">Create</a>
+        					</div>
+        				</div>
+        				
        	           </div>
        	       </div>
        	   </div>

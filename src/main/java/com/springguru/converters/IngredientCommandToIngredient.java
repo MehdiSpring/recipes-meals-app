@@ -8,6 +8,7 @@ import com.springguru.commands.IngredientCommand;
 import com.springguru.models.Ingredient;
 import com.springguru.models.Recipe;
 import com.springguru.models.UnitOfMeasure;
+import com.springguru.repositories.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
@@ -18,6 +19,8 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
 
 	//private final RecipeCommandToRecipe recipeCommandtoRecipe;
 	private final UOMCommandToUOM uomCommandToUOM;
+	
+	private final RecipeRepository recipeRepository;
 	
 	@Nullable
 	@Synchronized
@@ -31,6 +34,9 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
 		ingredient.setId(source.getId());
 		ingredient.setDescription(source.getDescription());
 		ingredient.setAmount(source.getAmount());
+		
+		//charger le recipe
+		ingredient.setRecipe(this.recipeRepository.findById(source.getRecipeId()).get());
 		
 		UnitOfMeasure uom = this.uomCommandToUOM.convert(source.getUom());
 		if(uom != null)
