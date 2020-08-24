@@ -9,6 +9,6 @@ public interface IngredientService {
 
 	Optional<Ingredient> findById(Long id);
 	IngredientCommand findByIdCommand(Long idCommand);
-	void saveIngredientCommand(IngredientCommand ingredientCommand);
+	IngredientCommand saveIngredientCommand(IngredientCommand ingredientCommand);
 	void delete(Long id);
 }

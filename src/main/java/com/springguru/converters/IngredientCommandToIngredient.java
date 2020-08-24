@@ -36,7 +36,7 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
 		ingredient.setAmount(source.getAmount());
 		
 		//charger le recipe
-		ingredient.setRecipe(this.recipeRepository.findById(source.getRecipeId()).get());
+		ingredient.setRecipe(this.recipeRepository.findById(source.getRecipeId()).orElse(new Recipe()));
 		
 		UnitOfMeasure uom = this.uomCommandToUOM.convert(source.getUom());
 		if(uom != null)

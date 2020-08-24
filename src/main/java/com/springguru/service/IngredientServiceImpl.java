@@ -14,17 +14,17 @@ import com.springguru.repositories.UnitOfMeasureRepository;
 @Service
 public class IngredientServiceImpl implements IngredientService {
     
-	private final UnitOfMeasureRepository unitOfMeasureRepository;
+	//private final UnitOfMeasureRepository unitOfMeasureRepository;
 	private final IngredientRepository ingredientRepository;
 	private final IngredientToIngredientCommand ingredientToIngredientCommand;
 	private final IngredientCommandToIngredient ingredientCommandToingredient;	
 
 	
-	public IngredientServiceImpl(UnitOfMeasureRepository unitOfMeasureRepository,
+	public IngredientServiceImpl(
 			IngredientRepository ingredientRepository, IngredientToIngredientCommand ingredientToIngredientCommand,
 			IngredientCommandToIngredient ingredientCommandToingredient) {
 		
-		this.unitOfMeasureRepository = unitOfMeasureRepository;
+		//this.unitOfMeasureRepository = unitOfMeasureRepository;
 		this.ingredientRepository = ingredientRepository;
 		this.ingredientToIngredientCommand = ingredientToIngredientCommand;
 		this.ingredientCommandToingredient = ingredientCommandToingredient;
@@ -45,11 +45,11 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 
 	@Override
-	public void saveIngredientCommand(IngredientCommand ingredientCommand) {
+	public IngredientCommand saveIngredientCommand(IngredientCommand ingredientCommand) {
 		Ingredient ingredient = this.ingredientCommandToingredient.convert(ingredientCommand);
 		
 		//this.unitOfMeasureRepository.save(ingredient.getUom());
-		this.ingredientRepository.save(ingredient);
+		return this.ingredientToIngredientCommand.convert(this.ingredientRepository.save(ingredient));
 		
 	}
 

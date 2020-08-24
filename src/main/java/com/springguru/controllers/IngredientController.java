@@ -76,8 +76,8 @@ public class IngredientController {
 	@RequestMapping("/ingredient/save")
 	public String createOrUpdate(@ModelAttribute IngredientCommand ingredientCommand)
 	{
-		this.ingredientService.saveIngredientCommand(ingredientCommand);
-		return "redirect:/recipe/"+ingredientCommand.getRecipeId()+"/ingredients/";
+		IngredientCommand ingrCom = this.ingredientService.saveIngredientCommand(ingredientCommand);
+		return "redirect:/recipe/"+ingrCom.getRecipeId()+"/ingredients/";
 	}
 	
 	@GetMapping

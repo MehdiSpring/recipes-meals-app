@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springguru.commands.IngredientCommand;
 import com.springguru.commands.RecipeCommand;
+
 import com.springguru.service.CategoryService;
 import com.springguru.service.RecipeService;
 
@@ -55,6 +56,7 @@ public class RecipeController {
 	@RequestMapping("/recipe/save")
 	public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand)
 	{
+	
 		RecipeCommand command = this.recipeService.saveRecipeCommand(recipeCommand);
 		
 		return "redirect:/recipe/show/"+command.getId();
