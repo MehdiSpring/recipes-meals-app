@@ -44,8 +44,10 @@ class RecipeToRecipeCommandTest {
 		
 		Ingredient ingredient1 = new Ingredient();
 		ingredient1.setId(1L);
+		ingredient1.setRecipe(recipe);
 		Ingredient ingredient2 = new Ingredient();
 		ingredient2.setId(2L);
+		ingredient2.setRecipe(recipe);
 		
 		recipe.getCategories().add(category1);
 		recipe.getCategories().add(category2);

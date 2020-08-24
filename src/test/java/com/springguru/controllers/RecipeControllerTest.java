@@ -66,8 +66,9 @@ class RecipeControllerTest {
 	}
 	
 	@Test
-	void testGetRecipetoUpdate() {
-		
+	void testGetRecipetoUpdate() throws Exception {
+	    mockMVC.perform(get("/recipe/update/1")).andExpect(status().isOk())
+	    										.andExpect(view().name("recipe/recipeForm"));
 	}
 	
 	@Test

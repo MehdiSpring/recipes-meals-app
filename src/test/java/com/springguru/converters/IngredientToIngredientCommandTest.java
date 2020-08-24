@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.springguru.commands.IngredientCommand;
 import com.springguru.models.Ingredient;
+import com.springguru.models.Recipe;
 
 class IngredientToIngredientCommandTest {
 
@@ -43,6 +44,7 @@ class IngredientToIngredientCommandTest {
 		ingredient.setId(id);
 		ingredient.setDescription(description);
 		ingredient.setAmount(amount);
+		ingredient.setRecipe(new Recipe());
 		
 		IngredientCommand ingredientCommand = ingredientToIngredientCommand.convert(ingredient);
 		assertEquals(id, ingredientCommand.getId());

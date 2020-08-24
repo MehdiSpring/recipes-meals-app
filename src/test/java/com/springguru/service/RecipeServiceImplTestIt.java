@@ -18,7 +18,7 @@ import com.springguru.commands.IngredientCommand;
 import com.springguru.commands.RecipeCommand;
 import com.springguru.converters.RecipeCommandToRecipe;
 import com.springguru.converters.RecipeToRecipeCommand;
-import com.springguru.models.Ingredient;
+
 import com.springguru.models.Recipe;
 import com.springguru.repositories.RecipeRepository;
 
@@ -56,8 +56,10 @@ class RecipeServiceImplTestIT {
 		
 		IngredientCommand ingredient1 = new IngredientCommand();
 		ingredient1.setId(10L);
+		ingredient1.setRecipeId(2L);
 		IngredientCommand ingredient2 = new IngredientCommand();
 		ingredient2.setId(11L);
+		ingredient2.setRecipeId(2L);
 		
 		ingredientsCommands.add(ingredient1);
 		ingredientsCommands.add(ingredient2);
