@@ -22,8 +22,17 @@
        <div class="col-md-6 col-md-offset-3">
        	   <div class="panel panel-primary">
        	       <div class="panel-heading">
-       	           <h1 class="panel-title" th:text="${recipe.description}">    	              
-       	           </h1>       	           
+       	         <div class="row"> 
+       	           <div class="col-md-8">
+       	           		<h1 class="panel-title" th:text="${recipe.description}"></h1>   
+       	           </div>
+       	           
+       	           <div class="col-md-4">
+        				<a class="btn btn-default" th:href="@{'/image/'+${recipe.id}+'/upload/'}" role="button">
+        				Charger une Image
+        				</a>
+        		   </div>
+        		 </div>    	           
        	       </div>
        	       
        	       <div class="panel-body">
@@ -35,6 +44,12 @@
        	       	           <ul th:each="cat : ${recipe.categories}">
        	       	               <li style="color: red;" th:text="${cat.categoryName}"></li>
        	       	           </ul>
+       	       	       </div>
+       	       	       
+       	       	       <div class="col-md-6">
+       	       	       		<img src="../../static/images/guacamole400x400WithX.jpg"
+       	       	       		th:src="@{'/image/'+${recipe.id}+'/load/'}"
+       	       	       		width="200" height="200"/>
        	       	       </div>
        	       	   </div>
        	       	   

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springguru.commands.IngredientCommand;
 import com.springguru.commands.RecipeCommand;
-
+import com.springguru.models.Recipe;
 import com.springguru.service.CategoryService;
 import com.springguru.service.RecipeService;
 
@@ -31,7 +31,7 @@ public class RecipeController {
 	@RequestMapping("/recipe/show/{id}")
 	public String recipeById(@PathVariable String id, Model model)
 	{
-		model.addAttribute("recipe", this.recipeService.findById(new Long(id)).get());
+		model.addAttribute("recipe", this.recipeService.findById(new Long(id)).orElse(new Recipe()));
 		return "recipe/details";
 	}
 	
