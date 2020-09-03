@@ -54,7 +54,7 @@ class ImageControllerTest {
 
 	@Test
 	void testUploadImage() throws Exception {
-		when(recipeService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(recipe));
+		when(recipeService.findById(ArgumentMatchers.anyLong())).thenReturn(recipe);
 		mockMVC.perform(get("/image/1/upload/")).andExpect(status().isOk())
 												.andExpect(view().name("/recipe/imageForm"));
 	}
