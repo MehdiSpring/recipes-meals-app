@@ -18,7 +18,7 @@ import com.springguru.commands.IngredientCommand;
 import com.springguru.commands.RecipeCommand;
 import com.springguru.converters.RecipeCommandToRecipe;
 import com.springguru.converters.RecipeToRecipeCommand;
-
+import com.springguru.exception.NotFoundException;
 import com.springguru.models.Recipe;
 import com.springguru.repositories.RecipeRepository;
 
@@ -43,7 +43,7 @@ class RecipeServiceImplTestIT {
 	RecipeToRecipeCommand recipeToRecipeCommand;
 	
 	@Autowired
-	RecipeServiceImpl recipesServiceImpl;
+	RecipeService recipesService;
 	
 
 	@BeforeEach
@@ -71,7 +71,7 @@ class RecipeServiceImplTestIT {
 	@Test
 	void testSaveRecipeCommand() {
 		
-		RecipeCommand recipeCommand2 = this.recipesServiceImpl.saveRecipeCommand(recipeCommand);
+		RecipeCommand recipeCommand2 = this.recipesService.saveRecipeCommand(recipeCommand);
 		
 		assertEquals(id, recipeCommand2.getId());
 		assertEquals(cookTime, recipeCommand2.getCookTime());
@@ -86,6 +86,27 @@ class RecipeServiceImplTestIT {
 		assertEquals(prepTime, recipe.getPrepTime());
 		assertEquals(2, recipe.getIngredients().size());
 		
+	}
+	
+	@Test
+	void testFindById()
+	{
+		Recipe recipe = this.recipesService.findById(1L);
+		assertNotNull(recipe);
+		assertEquals(1L, recipe.getId());
+	}
+	
+	@Test
+	void testFindNoExistingID()
+	{
+		assertThrows(NotFoundException.class, ()->{ this.recipesService.findById(3L); });
+		
+	}
+	
+	@org.junit.Test(expected = NotFoundException.class)
+	void testFindNoExistingIDJU4()
+	{
+		this.recipesService.findById(3L);
 	}
 
 }

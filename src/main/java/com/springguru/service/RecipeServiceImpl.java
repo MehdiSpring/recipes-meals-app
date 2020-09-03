@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.springguru.commands.RecipeCommand;
 import com.springguru.converters.RecipeCommandToRecipe;
 import com.springguru.converters.RecipeToRecipeCommand;
+import com.springguru.exception.NotFoundException;
 import com.springguru.models.Recipe;
 import com.springguru.repositories.RecipeRepository;
 
@@ -35,15 +36,23 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public Optional<Recipe> findById(Long id) {
+	public Recipe findById(Long id) {
+		Optional<Recipe> recipeOptional = this.recipeRepository.findById(id);
 		
-		return this.recipeRepository.findById(id);
+		if(!recipeOptional.isPresent())
+			throw new NotFoundException();
+		
+		return recipeOptional.get();
 	}
 
 	@Override
-	public Optional<Recipe> findByDescription(String description) {
+	public Recipe findByDescription(String description) {
+		Optional<Recipe> recipeOptional = this.recipeRepository.findByDescription(description);
 		
-		return this.recipeRepository.findByDescription(description);
+		if(!recipeOptional.isPresent())
+			throw new NotFoundException();
+		
+		return recipeOptional.get(); 
 	}
 
 	//@Transactional
@@ -60,9 +69,9 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public RecipeCommand findByIdCommand(Long idCommand) {
-		Optional<Recipe> recipeOptional = this.findById(idCommand);
+		Recipe recipe = this.findById(idCommand);
 		
-		RecipeCommand recipeCommand = this.recipeToRecipeCommand.convert(recipeOptional.get());
+		RecipeCommand recipeCommand = this.recipeToRecipeCommand.convert(recipe);
 		
 		return recipeCommand;
 	}
