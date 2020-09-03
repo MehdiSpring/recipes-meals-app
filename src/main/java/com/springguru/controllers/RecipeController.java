@@ -1,21 +1,20 @@
 package com.springguru.controllers;
 
 
-import java.math.BigDecimal;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.springguru.commands.IngredientCommand;
 import com.springguru.commands.RecipeCommand;
-import com.springguru.models.Recipe;
+import com.springguru.exception.NotFoundException;
 import com.springguru.service.CategoryService;
 import com.springguru.service.RecipeService;
 
@@ -31,7 +30,7 @@ public class RecipeController {
 	@RequestMapping("/recipe/show/{id}")
 	public String recipeById(@PathVariable String id, Model model)
 	{
-		model.addAttribute("recipe", this.recipeService.findById(new Long(id)).orElse(new Recipe()));
+		model.addAttribute("recipe", this.recipeService.findById(new Long(id)));
 		return "recipe/details";
 	}
 	
@@ -70,6 +69,16 @@ public class RecipeController {
 		this.recipeService.deleteRecipe(new Long(id));
 		
 		return "redirect:/index";
+	}
+	
+	@ResponseStatus(code=HttpStatus.NOT_FOUND)
+	@ExceptionHandler(NotFoundException.class)
+	public ModelAndView handleNotFoundException()
+	{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("error404");
+		
+		return modelAndView;
 	}
 
 }

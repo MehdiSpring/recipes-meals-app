@@ -23,6 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;import com.springguru.commands.RecipeCommand;
+import com.springguru.exception.NotFoundException;
 import com.springguru.models.Recipe;
 import com.springguru.repositories.RecipeRepository;
 import com.springguru.service.CategoryService;
@@ -53,7 +54,7 @@ class RecipeControllerTest {
 
 	@Test
 	void testRecipeById() throws Exception{
-		when(recipeService.findById(ArgumentMatchers.anyLong())).thenReturn(recipe);
+		when(recipeService.findById(ArgumentMatchers.anyLong())).thenReturn(recipe.get());
 		mockMVC.perform(get("/recipe/show/1")).andExpect(status().isOk())
 		                                      .andExpect(view().name("recipe/details"))
 		                                      .andExpect(model().attributeExists("recipe"));
@@ -83,5 +84,13 @@ class RecipeControllerTest {
 	void testDeleteRecipe() throws Exception{
 		mockMVC.perform(get("/recipe/delete/1")).andExpect(status().is3xxRedirection())
 												   .andExpect(view().name("redirect:/index"));
+	}
+	
+	@Test
+	void testRecipeNoExistingId() throws Exception{
+		when(recipeService.findById(ArgumentMatchers.anyLong())).thenThrow(NotFoundException.class);
+		
+		mockMVC.perform(get("/recipe/show/3")).andExpect(status().isNotFound())
+											  .andExpect(view().name("error404"));
 	}
 }
