@@ -38,7 +38,7 @@ public class ImageController {
 	@GetMapping("/image/{id}/upload/")
 	public String uploadImage(@PathVariable String id, Model model)
 	{
-		model.addAttribute("recipe", this.recipeService.findById(new Long(id)).get());
+		model.addAttribute("recipe", this.recipeService.findById(new Long(id)));
 		return "/recipe/imageForm";
 	}
 	
