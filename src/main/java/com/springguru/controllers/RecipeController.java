@@ -73,12 +73,27 @@ public class RecipeController {
 	
 	@ResponseStatus(code=HttpStatus.NOT_FOUND)
 	@ExceptionHandler(NotFoundException.class)
-	public ModelAndView handleNotFoundException()
+	public ModelAndView handleNotFoundException(Exception exception)
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("error404");
+		modelAndView.addObject("message", exception.getMessage());
 		
 		return modelAndView;
 	}
 
+	/*This exception became global, so to avoid duplicate it in each controller
+	  we used the @ControllerAdvice on the new controller :
+	  ControllerGlobalExceptionHandler*/
+	
+	/*
+	 * @ResponseStatus(code=HttpStatus.BAD_REQUEST)
+	 * 
+	 * @ExceptionHandler(NumberFormatException.class) public ModelAndView
+	 * handleNumberFormatException(Exception exception) { ModelAndView modelAndView
+	 * = new ModelAndView(); modelAndView.setViewName("error400");
+	 * modelAndView.addObject("message", exception.getMessage());
+	 * 
+	 * return modelAndView; }
+	 */
 }

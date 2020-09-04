@@ -48,7 +48,10 @@ class RecipeControllerTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		//MockitoAnnotations.initMocks(this);
-		mockMVC = MockMvcBuilders.standaloneSetup(recipeController).build();
+		mockMVC = MockMvcBuilders.standaloneSetup(recipeController).
+				  //this method allow us to configure a Controller Advice for our MOCKMVC
+				  setControllerAdvice(new ControllerGlobalExceptionHandler()).
+				  build();
 		recipe = Optional.of(new Recipe());
 	}
 
@@ -92,5 +95,12 @@ class RecipeControllerTest {
 		
 		mockMVC.perform(get("/recipe/show/3")).andExpect(status().isNotFound())
 											  .andExpect(view().name("error404"));
+	}
+	
+	@Test
+	void testRecipeBadId() throws Exception{
+		mockMVC.perform(get("/recipe/show/badId")).andExpect(status().isBadRequest())
+												  .andExpect(view().name("error400"))
+												  .andExpect(model().attributeExists("message"));
 	}
 }
